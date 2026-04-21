@@ -1,0 +1,13 @@
+QUIZ MAKER - HOW TO USE
+
+1. Download the ZIP file
+2. Right-click → Extract All
+3. Open the folder
+4. Double-click QuizMaker.exe
+
+5. Enter your test questions
+6. Click "Create HTML File"
+
+7. Open the HTML file it creates in your browser
+
+That's it!

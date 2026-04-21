@@ -1,0 +1,62 @@
+
+    <html>
+    <head>
+        <title>V1 Test</title>
+    </head>
+    <body>
+        <h1>V1 Test</h1>
+        <form id="quizForm">
+    <div id='question1'><h3>Question 1: Chose A.</h3>
+            <input type="radio" name="q1" value="A"> A. A<br>
+            <input type="radio" name="q1" value="B"> B. B<br>
+            <input type="radio" name="q1" value="C"> C. C<br>
+            <input type="radio" name="q1" value="D"> D. D<br>
+            <input type="hidden" id="correct1" value="A"><p id="feedback1"></p><hr></div><div id='question2'><h3>Question 2: Chose NOT B.</h3>
+            <input type="radio" name="q2" value="A"> A. A<br>
+            <input type="radio" name="q2" value="B"> B. B<br>
+            <input type="radio" name="q2" value="C"> C. C<br>
+            <input type="radio" name="q2" value="D"> D. D<br>
+            <input type="hidden" id="correct2" value="A"><p id="feedback2"></p><hr></div><div id='question3'><h3>Question 3: Choose True</h3>
+            <input type="radio" name="q3" value="True"> True<br>
+            <input type="radio" name="q3" value="False"> False<br>
+            <input type="hidden" id="correct3" value="True"><p id="feedback3"></p><hr></div>
+        <button type="button" onclick="gradeQuiz()">Submit Quiz</button>
+        </form>
+
+        <h2 id="result"></h2>
+
+        <script>
+        function gradeQuiz() {
+            let score = 0;
+            let total = 3;
+
+            for (let i = 1; i <= total; i++) {
+                let answers = document.getElementsByName("q" + i);
+                let correct = document.getElementById("correct" + i).value;
+                let feedback = document.getElementById("feedback" + i);
+                let selected = "";
+
+                for (let j = 0; j < answers.length; j++) {
+                    if (answers[j].checked) {
+                        selected = answers[j].value;
+                    }
+                }
+
+                if (selected === correct) {
+                    score++;
+                    feedback.innerText = "Correct";
+                } else {
+                    feedback.innerText = "Incorrect. Correct answer: " + correct;
+                }
+            }
+
+            let percentage = (score / total) * 100;
+
+            document.getElementById("result").innerHTML =
+                "You scored " + score + " out of " + total + "<br>" +
+                "Percentage: " + percentage.toFixed(1) + "%";
+        }
+        </script>
+    </body>
+    </html>
+    

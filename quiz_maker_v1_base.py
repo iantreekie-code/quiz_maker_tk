@@ -1,3 +1,33 @@
+# ==========================================
+# Version: V1 Base (Flow Controlled)
+# Status: Working 21 April 2026
+# Changes:
+# - Disabled buttons until Save Info
+# - Enabled Create HTML after last question
+# ==========================================
+#========================================
+# Ian's Quiz/Test creator 
+# Concept started 20 March 2026
+# Idea is to create multple choice, T/F and scenario based quizes:
+# That can be exported to HTML or similar for use in study and learning.
+#========================================
+#RoadMap
+#================================
+#V1.1
+# - Question review/view option before making test
+# - Better UI spacing
+#
+# V1.2
+# - Question pool randomizer
+# - Save load question modules
+#
+# V1.3
+# - PDF import/scanning
+# - image upload
+# - Mobile options
+#========================================
+
+
 import tkinter as tk
 
 # Defining variables
@@ -40,7 +70,7 @@ def save_info():
     question_number_label.config(
         text="Enter question " + str(current_question) + " of " + str(num_questions)
     )
-
+    save_question_button.config(state="normal")
 
 def save_question():
     global current_question
@@ -105,6 +135,8 @@ def save_question():
     if current_question > num_questions:
         result_label.config(text="All questions entered!")
         question_number_label.config(text="Done")
+        save_question_button.config(state="disabled")
+        create_html_button.config(state="normal")
     else:
         result_label.config(text="Question saved.")
         question_number_label.config(
@@ -113,7 +145,7 @@ def save_question():
 
     # Clear question fields
     question_entry.delete(0, tk.END)
-    question_type_entry.delete(0, tk.END)
+    
 
     answer_a_entry.delete(0, tk.END)
     answer_b_entry.delete(0, tk.END)
@@ -121,7 +153,8 @@ def save_question():
     answer_d_entry.delete(0, tk.END)
 
     correct_answer_var.set("A")
-
+    
+    create_html_button.config(state="normal")
 
 def create_html_file():
     if len(questions) == 0:
@@ -363,7 +396,27 @@ save_question_button.pack()
 create_html_button = tk.Button(window, text="Create HTML File", command=create_html_file)
 create_html_button.pack()
 
+# Disable question and HTML at start
+save_question_button.config(state="disabled")
+create_html_button.config(state="disabled")
+
 update_question_type()
 
 #Run the app
 window.mainloop()
+
+
+
+# ==========================================
+# BUILD COMMAND (PyInstaller)
+# ==========================================
+# To create EXE:
+# python -m PyInstaller --onefile --windowed quiz_maker_v1_base.py
+#
+# Notes:
+# --onefile   = packages everything into a single EXE
+# --windowed  = prevents console window from opening (for GUI apps)
+#
+# Output will be in:
+# dist/
+# ==========================================
